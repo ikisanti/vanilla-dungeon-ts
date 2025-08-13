@@ -221,15 +221,34 @@ console.log(heroes)
 
 
 
-class Hero {
+class GameHero {
+    data: Hero;
 
-    name: string
-    constructor(name: string) {
-        this.name = name
+    constructor(heroClass: HeroClass) {
+        this.data = heroes[heroClass]; // Load the hero from the object
+    }
+
+    attack(target: GameHero) {
+        console.log(`${this.data.name} attacks ${target.data.name}!`);
+        // Example: fixed damage (just for demo)
+        const dmg = Math.floor(Math.random() * 5) + 1;
+        console.log(`${target.data.name} takes ${dmg} damage.`);
+    }
+
+    showStats() {
+        console.log(`--- ${this.data.name} (${this.data.class}) ---`);
+        console.log(`HP: ${this.data.maxHP}, Damage: ${this.data.damage}, Speed: ${this.data.speed}`);
+        console.log(`Abilities: ${this.data.abilities.join(", ")}`);
     }
 }
 
+// Example: create two heroes from the list
+const crusader = new GameHero("Crusader");
+const plagueDoctor = new GameHero("Plague Doctor");
 
-const viking = new Hero('Stasya')
-console.log(viking.name)
+crusader.showStats();
+plagueDoctor.showStats();
+
+crusader.attack(plagueDoctor);
+
 
